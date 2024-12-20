@@ -1,6 +1,6 @@
 /**
  * Calculates the remaining time until the match starts.
- * @returns {Object} An object containing days, hours, minutes, and seconds remaining.
+ * @returns {{ days: number, hours: number, minutes: number, seconds: number }} An object containing days, hours, minutes, and seconds remaining.
  */
 function getRemainingTime() {
     const now = new Date();
@@ -29,11 +29,25 @@ function getRemainingTime() {
  * Updates the countdown timer display.
  */
 function updateTimer() {
-    /** @type {HTMLDivElement | null} */
+    /** @type {HTMLDivElement} */
     const timer = document.getElementById('timer');
-    const time = getRemainingTime();
+    const { days, hours, minutes, seconds } = getRemainingTime();
+
+    const formatedDays = hours.toString().padStart(2, '0')
+    const formatedHours = hours.toString().padStart(2, '0')
+    const formatedMinutes = minutes.toString().padStart(2, '0')
+    const formatedSeconds = seconds.toString().padStart(2, '0')
     
-    timer.innerHTML = `${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s`;
+    if (Number(formatedDays) === 0) {
+        timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+    }
+    
+    if (Number(formatedDays) === 0 && Number(formatedHours) === 0) {
+        timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+    }
+    
+    timer.textContent = `${formatedDays} dias ${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+    
 }
 
 // Update the timer every second
