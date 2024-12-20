@@ -29,10 +29,11 @@ function getRemainingTime() {
  * Updates the countdown timer display.
  */
 function updateTimer() {
+    /** @type {HTMLDivElement | null} */
     const timer = document.getElementById('timer');
     const time = getRemainingTime();
     
-    timer.textContent = `${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s`;
+    timer.innerHTML = `${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s`;
 }
 
 // Update the timer every second
