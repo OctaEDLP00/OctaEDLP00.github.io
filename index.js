@@ -1,24 +1,20 @@
 /**
  * Calculates the remaining time until the match starts.
- * @returns {{ days: number, hours: number, minutes: number, seconds: number }} An object containing days, hours, minutes, and seconds remaining.
+ * @typedef {{ days: string, hours: string, minutes: string, seconds: string }} RemainingTime
+ * @returns {RemainingTime} An object containing days, hours, minutes, and seconds remaining.
  */
 function getRemainingTime() {
   const now = new Date();
   const matchTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 21, 0, 0);
-
-  if (now > matchTime) {
-    matchTime.setDate(matchTime.getDate() + 1);
-  }
+  if (now > matchTime) matchTime.setDate(matchTime.getDate() + 1);
 
   // @ts-ignore
   const diff = matchTime - now;
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000)
-
-    // console.log({ diff, now, matchTime, days, hours, minutes, seconds })
+  const days = (Math.floor(diff / (1000 * 60 * 60 * 24))).toString();
+  const hours = (Math.floor((diff / (1000 * 60 * 60)) % 24)).toString().padStart(2, '0');
+  const minutes = (Math.floor((diff / (1000 * 60)) % 60)).toString().padStart(2, '0');
+  const seconds = (Math.floor((diff / 1000) % 60)).toString().padStart(2, '0');
 
   return {
     days,
@@ -34,23 +30,17 @@ function getRemainingTime() {
 function updateTimer() {
   /** @type {HTMLDivElement | null} */
   const timer = document.querySelector('#timer');
+  if (!timer) throw new Error('Timer not defined or not exixts');
+
   const { days, hours, minutes, seconds } = getRemainingTime();
 
-  const formatedDays = days.toString()
-  const formatedHours = hours.toString().padStart(2, '0')
-  const formatedMinutes = minutes.toString().padStart(2, '0')
-  const formatedSeconds = seconds.toString().padStart(2, '0')
 
-  if (!timer) throw new Error('Timer not defined or not exixts')
-
-  // console.log({ formatedDays, formatedHours, formatedMinutes, formatedSeconds })
-
-  if (Number(formatedDays) === 0) {
-    timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
-  } else if (Number(formatedDays) === 0 && Number(formatedHours) === 0) {
-    timer.textContent = `${formatedMinutes}:${formatedSeconds}`;
+  if (Number(days) === 0) {
+    timer.textContent = `${hours}:${minutes}:${seconds}`;
+  } else if (Number(days) === 0 && Number(hours) === 0) {
+    timer.textContent = `${minutes}:${seconds}`;
   } else {
-    timer.textContent = `${formatedDays} dias ${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+    timer.textContent = `${days} dias ${hours}:${minutes}:${seconds}`;
   }
 }
 
