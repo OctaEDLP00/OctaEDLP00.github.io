@@ -52,7 +52,11 @@ function updateTimer() {
   } else if (Number(days) === 0 && Number(hours) === 0) {
     timer.textContent = `${minutes}:${seconds}`
   } else {
-    timer.textContent = `${days} dias ${hours}:${minutes}:${seconds}`
+    if (Number(days) > 1) {
+      timer.textContent = `${days} dias ${hours}:${minutes}:${seconds}`
+    } else (
+      timer.textContent = `${days} día ${hours}:${minutes}:${seconds}`
+    )
   }
 }
 
