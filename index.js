@@ -45,7 +45,7 @@ function updateTimer() {
 
   if (!timer) throw new Error('Timer not defined or not exixts')
 
-  const { days, hours, minutes, seconds } = getRemainingTime(new Date(1734825600))
+  const { days, hours, minutes, seconds } = getRemainingTime(new Date(1734825600000))
 
   if (Number(days) === 0) {
     timer.textContent = `${hours}:${minutes}:${seconds}`
