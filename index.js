@@ -33,7 +33,7 @@ function updateTimer() {
     const timer = document.getElementById('timer');
     const { days, hours, minutes, seconds } = getRemainingTime();
 
-    const formatedDays = hours.toString().padStart(2, '0')
+    const formatedDays = hours.toString()
     const formatedHours = hours.toString().padStart(2, '0')
     const formatedMinutes = minutes.toString().padStart(2, '0')
     const formatedSeconds = seconds.toString().padStart(2, '0')
