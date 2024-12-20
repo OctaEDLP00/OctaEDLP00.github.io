@@ -10,6 +10,7 @@ function getRemainingTime() {
         matchTime.setDate(matchTime.getDate() + 1);
     }
 
+    // @ts-ignore
     const diff = matchTime - now;
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24))
@@ -31,23 +32,25 @@ function getRemainingTime() {
  * Updates the countdown timer display.
  */
 function updateTimer() {
-    /** @type {HTMLDivElement} */
-    const timer = document.getElementById('timer');
+    /** @type {HTMLDivElement | null} */
+    const timer = document.querySelector('#timer');
     const { days, hours, minutes, seconds } = getRemainingTime();
 
-    const formatedDays = hours.toString()
+    const formatedDays = days.toString()
     const formatedHours = hours.toString().padStart(2, '0')
     const formatedMinutes = minutes.toString().padStart(2, '0')
     const formatedSeconds = seconds.toString().padStart(2, '0')
 
-    console.log({ formatedDays, formatedHours, formatedMinutes, formatedSeconds })
+    if (!timer) throw new Error('Timer not defined or not exixts')
+
+    // console.log({ formatedDays, formatedHours, formatedMinutes, formatedSeconds })
 
     if (Number(formatedDays) === 0) {
         timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
     }
 
     if (Number(formatedDays) === 0 && Number(formatedHours) === 0) {
-        timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+        timer.textContent = `${formatedMinutes}:${formatedSeconds}`;
     }
 
     timer.textContent = `${formatedDays} dias ${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
