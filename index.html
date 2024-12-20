@@ -123,10 +123,10 @@
             const timer = document.getElementById('timer');
             const { days, hours, minutes, seconds } = getRemainingTime();
 
-            const formatedDays = hours.toString().pasdStart(1, '0')
-            const formatedHours = hours.toString().pasdStart(1, '0')
-            const formatedMinutes = minutes.toString().pasdStart(1, '0')
-            const formatedSeconds = seconds.toString().pasdStart(1, '0')
+            const formatedDays = hours.toString().padStart(1, '0')
+            const formatedHours = hours.toString().padStart(1, '0')
+            const formatedMinutes = minutes.toString().padStart(1, '0')
+            const formatedSeconds = seconds.toString().padStart(1, '0')
             
             if (Number(formatedDays) === 0) {
                 timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
