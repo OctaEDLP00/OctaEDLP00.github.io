@@ -17,6 +17,8 @@ function getRemainingTime() {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
     const seconds = Math.floor((diff % (1000 * 60)) / 1000)
   
+    console.log({ dif, now, matchTime, days, hours, minutes, seconds })
+    
     return {
         days,
         hours,
@@ -37,6 +39,8 @@ function updateTimer() {
     const formatedHours = hours.toString().padStart(2, '0')
     const formatedMinutes = minutes.toString().padStart(2, '0')
     const formatedSeconds = seconds.toString().padStart(2, '0')
+
+    console.log({ formatedDays, formatedHours, formatedMinutes, formatedSeconds })
     
     if (Number(formatedDays) === 0) {
         timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
