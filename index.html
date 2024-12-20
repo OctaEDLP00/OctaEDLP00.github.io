@@ -130,11 +130,14 @@
             
             if (Number(formatedDays) === 0) {
                 timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
-            } else if (Number(formatedDays) === 0 && Number(formatedHours) === 0) {
-                timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
-            } else {
-                timer.textContent = `${formatedDays} dias ${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
             }
+            
+            if (Number(formatedDays) === 0 && Number(formatedHours) === 0) {
+                timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+            }
+            
+            timer.textContent = `${formatedDays} dias ${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+            
         }
         
         // Update the timer every second
