@@ -1,38 +1,32 @@
+const { floor, max } = Math
+
+/** @param {number} value */
+const alwaysPositive = (value) => max(0, value)
+
 /**
  * Calculates the remaining time until the match starts.
- * @param {string | Date} [targetDate]
+ * @param {Date} targetDate
  * @typedef {{ days: string, hours: string, minutes: string, seconds: string }} RemainingTime
  * @returns {RemainingTime} An object containing days, hours, minutes, and seconds remaining.
  */
 function getRemainingTime(targetDate) {
+  const currentDate = new Date()
 
-  if (!targetDate)
-    throw new Error('No targetDate provided. Please provide a date string or Date object')
+  const diff = targetDate.getTime() - currentDate.getTime()
 
-  const target = typeof targetDate === 'string' ? new Date(targetDate) : targetDate
+  const days = alwaysPositive(
+    floor(diff / (1000 * 60 * 60 * 24))
+  ).toString().padStart(2, '0')
 
-  if (isNaN(target.getTime())) {
-    throw new Error('Invalid date format. Provide a valid Date object or date string')
-  }
+  const hours = alwaysPositive(
+    floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  ).toString().padStart(2, '0')
 
-  const now = new Date()
+  const minutes = alwaysPositive(
+    floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  ).toString().padStart(2, '0')
 
-  // @ts-ignore
-  const diff = target - now
-
-  if (diff <= 0) {
-    return {
-      days: '00',
-      hours: '00',
-      minutes: '00',
-      seconds: '00'
-    }
-  }
-
-  const days = (Math.floor(diff / (1000 * 60 * 60 * 24))).toString()
-  const hours = (Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().padStart(2, '0')
-  const minutes = (Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).toString().padStart(2, '0')
-  const seconds = (Math.floor((diff % (1000 * 60)) / 1000)).toString().padStart(2, '0')
+  const seconds = alwaysPositive(floor((diff % (1000 * 60)) / 1000)).toString().padStart(2, '0')
 
   return {
     days,
@@ -48,9 +42,10 @@ function getRemainingTime(targetDate) {
 function updateTimer() {
   /** @type {HTMLDivElement | null} */
   const timer = document.querySelector('#timer')
+
   if (!timer) throw new Error('Timer not defined or not exixts')
 
-  const { days, hours, minutes, seconds } = getRemainingTime('2024-12-21T21:00:00')
+  const { days, hours, minutes, seconds } = getRemainingTime(new Date(1734825600))
 
   if (Number(days) === 0) {
     timer.textContent = `${hours}:${minutes}:${seconds}`
