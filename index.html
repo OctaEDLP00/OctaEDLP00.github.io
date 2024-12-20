@@ -119,11 +119,15 @@
          * Updates the countdown timer display.
          */
         function updateTimer() {
-            /** @type {HTMLDivElement | null} */
+            /** @type {HTMLDivElement} */
             const timer = document.getElementById('timer');
-            const time = getRemainingTime();
+            const { days, hours, minutes, seconds } = getRemainingTime();
+    
+            if (Number(day) === 0) {
+                timer.textContent = `${hours}h ${minutes}m ${seconds}s`;
+            }
             
-            timer.innerHTML = `${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s`;
+            timer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
         
         // Update the timer every second
