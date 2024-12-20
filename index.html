@@ -90,7 +90,7 @@
     <script type="module">
         /**
          * Calculates the remaining time until the match starts.
-         * @returns {Object} An object containing days, hours, minutes, and seconds remaining.
+         * @returns {{ days: number, hours: number, minutes: number, seconds: number }} An object containing days, hours, minutes, and seconds remaining.
          */
         function getRemainingTime() {
             const now = new Date();
@@ -123,7 +123,7 @@
             const timer = document.getElementById('timer');
             const { days, hours, minutes, seconds } = getRemainingTime();
     
-            if (Number(days) === 0) {
+            if (days === 0) {
                 timer.textContent = `${hours}h ${minutes}m ${seconds}s`;
             }
             
