@@ -3,57 +3,55 @@
  * @returns {{ days: number, hours: number, minutes: number, seconds: number }} An object containing days, hours, minutes, and seconds remaining.
  */
 function getRemainingTime() {
-    const now = new Date();
-    const matchTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 21, 0, 0);
+  const now = new Date();
+  const matchTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 21, 0, 0);
 
-    if (now > matchTime) {
-        matchTime.setDate(matchTime.getDate() + 1);
-    }
+  if (now > matchTime) {
+    matchTime.setDate(matchTime.getDate() + 1);
+  }
 
-    // @ts-ignore
-    const diff = matchTime - now;
+  // @ts-ignore
+  const diff = matchTime - now;
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24))
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000)
 
     // console.log({ diff, now, matchTime, days, hours, minutes, seconds })
 
-    return {
-        days,
-        hours,
-        minutes,
-        seconds
-    };
+  return {
+    days,
+    hours,
+    minutes,
+    seconds
+  };
 }
 
 /**
  * Updates the countdown timer display.
  */
 function updateTimer() {
-    /** @type {HTMLDivElement | null} */
-    const timer = document.querySelector('#timer');
-    const { days, hours, minutes, seconds } = getRemainingTime();
+  /** @type {HTMLDivElement | null} */
+  const timer = document.querySelector('#timer');
+  const { days, hours, minutes, seconds } = getRemainingTime();
 
-    const formatedDays = days.toString()
-    const formatedHours = hours.toString().padStart(2, '0')
-    const formatedMinutes = minutes.toString().padStart(2, '0')
-    const formatedSeconds = seconds.toString().padStart(2, '0')
+  const formatedDays = days.toString()
+  const formatedHours = hours.toString().padStart(2, '0')
+  const formatedMinutes = minutes.toString().padStart(2, '0')
+  const formatedSeconds = seconds.toString().padStart(2, '0')
 
-    if (!timer) throw new Error('Timer not defined or not exixts')
+  if (!timer) throw new Error('Timer not defined or not exixts')
 
-    // console.log({ formatedDays, formatedHours, formatedMinutes, formatedSeconds })
+  // console.log({ formatedDays, formatedHours, formatedMinutes, formatedSeconds })
 
-    if (Number(formatedDays) === 0) {
-        timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
-    }
-
-    else if (Number(formatedDays) === 0 && Number(formatedHours) === 0) {
-        timer.textContent = `${formatedMinutes}:${formatedSeconds}`;
-    } else {
-        timer.textContent = `${formatedDays} dias ${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
-    }
+  if (Number(formatedDays) === 0) {
+    timer.textContent = `${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+  } else if (Number(formatedDays) === 0 && Number(formatedHours) === 0) {
+    timer.textContent = `${formatedMinutes}:${formatedSeconds}`;
+  } else {
+    timer.textContent = `${formatedDays} dias ${formatedHours}:${formatedMinutes}:${formatedSeconds}`;
+  }
 }
 
 // Update the timer every second
