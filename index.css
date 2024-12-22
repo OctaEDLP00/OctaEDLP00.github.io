@@ -47,6 +47,7 @@ body {
   position: absolute;
   inset: 0;
   width: auto;
+  z-index: 10;
 }
 
 @keyframes fadeIn {
