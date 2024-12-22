@@ -60,6 +60,11 @@ function updateTimer() {
   }
 }
 
+const container = document.querySelector('body')
+const fireworks = new Fireworks.default(container)
+
+fireworks.start()
+
 // Update the timer every second
 setInterval(updateTimer, 1000)
 
