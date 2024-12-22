@@ -43,7 +43,7 @@ function getRemainingTime(targetDate) {
  */
 /*
 function updateTimer() {
-  /** @type {HTMLDivElement | null} */
+  /** @type {HTMLDivElement | null}
   const timer = document.querySelector('#timer')
 
   if (!timer) throw new Error('Timer not defined or not exixts')
@@ -64,10 +64,8 @@ function updateTimer() {
 }
 */
 
-/*
+
 const container = document.querySelector('.container')
 const fireworks = new Fireworks.default(container)
 
 fireworks.start()
-*/
-
