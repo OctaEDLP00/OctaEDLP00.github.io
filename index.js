@@ -60,7 +60,7 @@ function updateTimer() {
   }
 }
 
-const container = document.querySelector('body')
+const container = document.querySelector('.container')
 const fireworks = new Fireworks.default(container)
 
 fireworks.start()
