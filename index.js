@@ -1,7 +1,7 @@
-const { floor, max } = Math
+// const { floor, max } = Math
 
 /** @param {number} value */
-const alwaysPositive = (value) => max(0, value)
+// const alwaysPositive = (value) => max(0, value)
 
 /**
  * Calculates the remaining time until the match starts.
@@ -9,6 +9,7 @@ const alwaysPositive = (value) => max(0, value)
  * @typedef {{ days: string, hours: string, minutes: string, seconds: string }} RemainingTime
  * @returns {RemainingTime} An object containing days, hours, minutes, and seconds remaining.
  */
+/*
 function getRemainingTime(targetDate) {
   const currentDate = new Date()
 
@@ -35,10 +36,12 @@ function getRemainingTime(targetDate) {
     seconds
   }
 }
+*/
 
 /**
  * Updates the countdown timer display.
  */
+/*
 function updateTimer() {
   /** @type {HTMLDivElement | null} */
   const timer = document.querySelector('#timer')
@@ -59,15 +62,12 @@ function updateTimer() {
     )
   }
 }
+*/
 
+/*
 const container = document.querySelector('.container')
 const fireworks = new Fireworks.default(container)
 
 fireworks.start()
-
-// Update the timer every second
-setInterval(updateTimer, 1000)
-
-// Initial update
-updateTimer()
+*/
 
