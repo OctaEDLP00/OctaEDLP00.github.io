@@ -20,6 +20,7 @@ h1 {
 
 .match-info {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
